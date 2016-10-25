@@ -14,6 +14,12 @@ drop.get("test") { request in
         ]);
 }
 
+drop.get("beers", Int.self) { request, beers in
+    return try JSON(node: [
+        "message" : "Give me \(beers) beers"
+        ]);
+}
+
 drop.resource("posts", PostController())
 
 drop.run()
