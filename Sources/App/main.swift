@@ -20,6 +20,16 @@ drop.get("beers", Int.self) { request, beers in
         ]);
 }
 
+drop.post("post-hello") { request in
+    guard let name = request.data["name"]?.string else {
+        throw Abort.badRequest;
+    }
+    
+    return try JSON(node: [
+        "message" : "Hello \(name)"
+    ])
+}
+
 drop.resource("posts", PostController())
 
 drop.run()
